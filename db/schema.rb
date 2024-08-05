@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_05_032703) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_05_033253) do
+  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "issuer_id", null: false
+    t.bigint "country_id", null: false
+    t.bigint "province_id", null: false
+    t.string "city", null: false
+    t.string "address", null: false
+    t.string "zip_code", null: false
+    t.integer "address_type", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_addresses_on_country_id"
+    t.index ["issuer_id"], name: "index_addresses_on_issuer_id"
+    t.index ["province_id"], name: "index_addresses_on_province_id"
+  end
+
   create_table "countries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -43,5 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_032703) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "addresses", "countries"
+  add_foreign_key "addresses", "issuers"
+  add_foreign_key "addresses", "provinces"
   add_foreign_key "issuers", "industries"
 end
