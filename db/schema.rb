@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_05_033253) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_05_034005) do
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "issuer_id", null: false
     t.bigint "country_id", null: false
@@ -24,6 +24,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_033253) do
     t.index ["country_id"], name: "index_addresses_on_country_id"
     t.index ["issuer_id"], name: "index_addresses_on_issuer_id"
     t.index ["province_id"], name: "index_addresses_on_province_id"
+  end
+
+  create_table "company_links", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "issuer_id", null: false
+    t.string "linkedin_url"
+    t.string "youtube_url"
+    t.string "instagram_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issuer_id"], name: "index_company_links_on_issuer_id"
   end
 
   create_table "countries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -58,8 +68,22 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_033253) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "security_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "issuer_id", null: false
+    t.string "name_en", null: false
+    t.string "name_fr", null: false
+    t.integer "issue_outstanding", default: 0, null: false
+    t.integer "reserved_for_issuance", default: 0, null: false
+    t.integer "total_equity_shares_as_if_converted", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issuer_id"], name: "index_security_details_on_issuer_id"
+  end
+
   add_foreign_key "addresses", "countries"
   add_foreign_key "addresses", "issuers"
   add_foreign_key "addresses", "provinces"
+  add_foreign_key "company_links", "issuers"
   add_foreign_key "issuers", "industries"
+  add_foreign_key "security_details", "issuers"
 end
