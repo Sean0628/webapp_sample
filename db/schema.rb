@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_05_031716) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_05_032703) do
   create_table "countries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -23,10 +23,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_031716) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "issuers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "external_id", null: false
+    t.string "name_en", null: false
+    t.string "name_fr", null: false
+    t.text "description_en"
+    t.text "description_fr"
+    t.string "logo_url"
+    t.bigint "industry_id", null: false
+    t.date "financial_year_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["industry_id"], name: "index_issuers_on_industry_id"
+  end
+
   create_table "provinces", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "issuers", "industries"
 end
