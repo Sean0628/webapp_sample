@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_05_034005) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_06_231449) do
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "issuer_id", null: false
     t.bigint "country_id", null: false
@@ -40,6 +40,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_034005) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "edit_request_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "edit_request_id", null: false
+    t.integer "field_name", default: 0, null: false
+    t.string "old_value"
+    t.string "new_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["edit_request_id"], name: "index_edit_request_details_on_edit_request_id"
+  end
+
+  create_table "edit_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "issuer_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issuer_id"], name: "index_edit_requests_on_issuer_id"
   end
 
   create_table "industries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -84,6 +102,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_034005) do
   add_foreign_key "addresses", "issuers"
   add_foreign_key "addresses", "provinces"
   add_foreign_key "company_links", "issuers"
+  add_foreign_key "edit_request_details", "edit_requests"
+  add_foreign_key "edit_requests", "issuers"
   add_foreign_key "issuers", "industries"
   add_foreign_key "security_details", "issuers"
 end
