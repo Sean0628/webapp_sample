@@ -47,8 +47,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_06_231449) do
     t.integer "field_name", default: 0, null: false
     t.string "old_value"
     t.string "new_value"
+    t.integer "associated_record_id", null: false
+    t.string "associated_record_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["associated_record_id", "associated_record_type"], name: "index_edit_request_details_on_associated_record"
     t.index ["edit_request_id"], name: "index_edit_request_details_on_edit_request_id"
   end
 
