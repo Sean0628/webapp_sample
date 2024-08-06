@@ -14,4 +14,15 @@ class IssuersController < ActionController::Base # :nodoc:
     flash[:alert] = NOT_FOUND_MESSAGE
     redirect_to issuers_path
   end
+
+  def edit
+    @issuer = Issuer.includes(:industry, :company_link, :company_addresses, :mailing_addresses, :billing_addresses,
+                              :security_details).find(params[:id])
+    @industries = Industry.all
+    @countries = Country.all
+    @provinces = Province.all
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = NOT_FOUND_MESSAGE
+    redirect_to issuers_path
+  end
 end

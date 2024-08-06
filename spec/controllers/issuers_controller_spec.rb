@@ -53,4 +53,23 @@ describe IssuersController, type: :controller do # rubocop:disable Lint/BlockLen
       end
     end
   end
+
+  describe 'GET #edit' do
+    let!(:issuer) { create(:issuer) }
+
+    it 'returns a successful response' do
+      get :edit, params: { id: issuer.id }
+      expect(response).to be_successful
+    end
+
+    it 'assigns @issuer' do
+      get :edit, params: { id: issuer.id }
+      expect(assigns(:issuer)).to eq(issuer)
+    end
+
+    it 'renders the edit template' do
+      get :edit, params: { id: issuer.id }
+      expect(response).to render_template(:edit)
+    end
+  end
 end

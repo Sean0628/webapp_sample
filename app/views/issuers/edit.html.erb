@@ -1,0 +1,93 @@
+<h1>Edit Issuer Details</h1>
+
+<%#TODO: replace url%>
+<%= form_with(model: @issuer, local: true) do |form| %>
+  <div class="section">
+    <%= render 'shared/errors', object: @issuer %>
+
+    <table>
+      <tr>
+        <th>Company Name (EN)</th>
+        <td><%= form.text_field :name_en %></td>
+      </tr>
+      <tr>
+        <th>Company Name (FR)</th>
+        <td><%= form.text_field :name_fr %></td>
+      </tr>
+      <tr>
+        <th>Company Description (EN)</th>
+        <td><%= form.text_area :description_en %></td>
+      </tr>
+      <tr>
+        <th>Company Description (FR)</th>
+        <td><%= form.text_area :description_fr %></td>
+      </tr>
+      <tr>
+        <th>Logo URL</th>
+        <td><%= form.text_field :logo_url %></td>
+      </tr>
+      <tr>
+        <th>Industry</th>
+        <td><%= form.collection_select :industry_id, @industries, :id, :name %></td>
+      </tr>
+      <tr>
+        <th>Financial Year End</th>
+        <td><%= form.date_select :financial_year_end %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Company Links</h2>
+    <table>
+      <tr>
+        <th>LinkedIn</th>
+        <td><%= form.fields_for :company_link do |link_form| %>
+          <%= link_form.text_field :linkedin_url %>
+        <% end %></td>
+      </tr>
+      <tr>
+        <th>YouTube</th>
+        <td><%= form.fields_for :company_link do |link_form| %>
+          <%= link_form.text_field :youtube_url %>
+        <% end %></td>
+      </tr>
+      <tr>
+        <th>Instagram</th>
+        <td><%= form.fields_for :company_link do |link_form| %>
+          <%= link_form.text_field :instagram_url %>
+        <% end %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Company Addresses</h2>
+    <%= form.fields_for :company_addresses do |address_form| %>
+      <%= render 'address_fields', f: address_form %>
+    <% end %>
+  </div>
+
+  <div class="section">
+    <h2>Billing Addresses</h2>
+    <%= form.fields_for :billing_addresses do |address_form| %>
+      <%= render 'address_fields', f: address_form %>
+    <% end %>
+  </div>
+
+  <div class="section">
+    <h2>Mailing Addresses</h2>
+    <%= form.fields_for :mailing_addresses do |address_form| %>
+      <%= render 'address_fields', f: address_form %>
+    <% end %>
+  </div>
+
+  <div class="section">
+    <h2>Security Details</h2>
+    <%= form.fields_for :security_details do |security_form| %>
+      <%= render 'security_fields', f: security_form %>
+    <% end %>
+  </div>
+
+  <%= form.submit 'Submit Edit Request', class: 'btn btn-primary' %>
+<% end %>
