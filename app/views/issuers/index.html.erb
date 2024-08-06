@@ -1,0 +1,36 @@
+<h1>Issuers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>External ID</th>
+      <th>Name (EN)</th>
+      <th>Name (FR)</th>
+      <th>Description (EN)</th>
+      <th>Description (FR)</th>
+      <th>Logo URL</th>
+      <th>Industry</th>
+      <th>Financial Year End</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @issuers.each do |issuer| %>
+      <tr>
+        <td><%= issuer.id %></td>
+        <td><%= issuer.external_id %></td>
+        <td><%= issuer.name_en %></td>
+        <td><%= issuer.name_fr %></td>
+        <td><%= issuer.description_en %></td>
+        <td><%= issuer.description_fr %></td>
+        <td><%= issuer.logo_url %></td>
+        <td><%= issuer.industry.name %></td>
+        <td><%= issuer.financial_year_end %></td>
+        <td><%= issuer.created_at %></td>
+        <td><%= issuer.updated_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
