@@ -12,8 +12,6 @@
       <th>Logo URL</th>
       <th>Industry</th>
       <th>Financial Year End</th>
-      <th>Created At</th>
-      <th>Updated At</th>
     </tr>
   </thead>
   <tbody>
@@ -25,11 +23,9 @@
         <td><%= issuer.name_fr %></td>
         <td><%= issuer.description_en %></td>
         <td><%= issuer.description_fr %></td>
-        <td><%= issuer.logo_url %></td>
+        <td><%= issuer.logo_url %></td> <%# This can be replaced w/ an image tag if you want to display the logo %>
         <td><%= issuer.industry.name %></td>
         <td><%= issuer.financial_year_end %></td>
-        <td><%= issuer.created_at %></td>
-        <td><%= issuer.updated_at %></td>
       </tr>
     <% end %>
   </tbody>
