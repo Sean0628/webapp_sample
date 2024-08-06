@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_034005) do
     t.text "description_fr"
     t.string "logo_url"
     t.bigint "industry_id", null: false
-    t.date "financial_year_end"
+    t.date "financial_year_end", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["industry_id"], name: "index_issuers_on_industry_id"
