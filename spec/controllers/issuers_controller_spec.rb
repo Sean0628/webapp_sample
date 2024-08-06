@@ -40,5 +40,17 @@ describe IssuersController, type: :controller do # rubocop:disable Lint/BlockLen
       get :show, params: { id: issuer.id }
       expect(response).to render_template(:show)
     end
+
+    context 'when the issuer does not exist' do
+      it 'redirects to the issuers index' do
+        get :show, params: { id: 'invalid-id' }
+        expect(response).to redirect_to(issuers_path)
+      end
+
+      it 'sets a flash alert' do
+        get :show, params: { id: 'invalid-id' }
+        expect(flash[:alert]).to eq('The issuer you are looking for could not be found.')
+      end
+    end
   end
 end
