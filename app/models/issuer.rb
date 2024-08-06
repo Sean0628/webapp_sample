@@ -2,7 +2,7 @@
 
 class Issuer < ApplicationRecord # :nodoc:
   belongs_to :industry
-  has_one :company_links, dependent: :destroy
+  has_one :company_link, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :security_details, dependent: :destroy
   has_many :company_addresses, -> { where(address_type: :company) }, class_name: 'Address'
