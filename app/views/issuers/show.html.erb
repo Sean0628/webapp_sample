@@ -52,19 +52,61 @@
 </div>
 
 <div class="section">
-    <h2>Addresses</h2>
+    <h2>Company Addresses</h2>
     <table>
         <tr>
-            <th>Type</th>
             <th>Country</th>
             <th>Address</th>
             <th>City</th>
             <th>Province</th>
             <th>Zip Code</th>
         </tr>
-        <% @issuer.addresses.each do |address| %>
+        <% @issuer.company_addresses.each do |address| %>
         <tr>
-            <td><%= address.address_type %></td>
+            <td><%= address.country %></td>
+            <td><%= address.address %></td>
+            <td><%= address.city %></td>
+            <td><%= address.province %></td>
+            <td><%= address.zip_code %></td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Billing Addresses</h2>
+    <table>
+        <tr>
+            <th>Country</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Province</th>
+            <th>Zip Code</th>
+        </tr>
+        <% @issuer.billing_addresses.each do |address| %>
+        <tr>
+            <td><%= address.country %></td>
+            <td><%= address.address %></td>
+            <td><%= address.city %></td>
+            <td><%= address.province %></td>
+            <td><%= address.zip_code %></td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Mailing Addresses</h2>
+    <table>
+        <tr>
+            <th>Country</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Province</th>
+            <th>Zip Code</th>
+        </tr>
+        <% @issuer.mailing_addresses.each do |address| %>
+        <tr>
             <td><%= address.country %></td>
             <td><%= address.address %></td>
             <td><%= address.city %></td>
