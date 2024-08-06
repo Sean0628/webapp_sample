@@ -8,7 +8,8 @@ class IssuersController < ActionController::Base # :nodoc:
   end
 
   def show
-    @issuer = Issuer.find(params[:id])
+    @issuer = Issuer.includes(:industry, :company_link, :company_addresses, :mailing_addresses, :billing_addresses,
+                              :security_details).find(params[:id])
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = NOT_FOUND_MESSAGE
     redirect_to issuers_path
