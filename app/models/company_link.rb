@@ -5,6 +5,7 @@ class CompanyLink < ApplicationRecord # :nodoc:
 
   belongs_to :issuer
 
+  validates :issuer, presence: true
   validates :linkedin_url, :youtube_url, :instagram_url,
             format: { with: URL_REGEX, message: 'must be a valid URL' },
             allow_blank: true
