@@ -1,10 +1,11 @@
 
 <h1>Edit Issuer Details</h1>
 
-<% #TODO: replace url %>
-<%= form_with(model: @issuer, local: true) do |form| %>
+<%= form_with(model: @issuer, url: edit_requests_path, method: :post, local: true) do |form| %>
   <div class="section">
-    <%= render 'shared/errors', object: @issuer %>
+    <% if defined?(@form) %>
+      <%= render 'shared/errors', object: @form %>
+    <% end %>
 
     <table>
       <tr>
@@ -94,6 +95,7 @@
     <% end %>
   </div>
 
+  <%= form.hidden_field :issuer_id, value: @issuer.id %>
   <%= form.submit 'Submit Edit Request', class: 'btn btn-primary' %>
 <% end %>
 
