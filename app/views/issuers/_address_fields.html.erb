@@ -1,7 +1,8 @@
+<%= f.hidden_field :id %>
 <table>
   <tr>
     <th>Country</th>
-    <td><%= f.collection_select :country_id, @countries, :id, :name %></td>
+    <td><%= f.collection_select :country_id, Country.all, :id, :name %></td>
   </tr>
   <tr>
     <th>Address</th>
@@ -9,15 +10,14 @@
   </tr>
   <tr>
     <th>City</th>
-    <td><%= f.text_area :city %></td>
+    <td><%= f.text_field :city %></td>
   </tr>
   <tr>
     <th>Province</th>
-    <td><%= f.collection_select :province_id, @provinces, :id, :name %></td>
+    <td><%= f.collection_select :province_id, Province.all, :id, :name %></td>
   </tr>
   <tr>
     <th>Zip Code</th>
     <td><%= f.text_field :zip_code %></td>
   </tr>
 </table>
-

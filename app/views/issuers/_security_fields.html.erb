@@ -1,15 +1,16 @@
+<%= f.hidden_field :id %>
 <table>
   <tr>
     <th>Security Name (EN)</th>
-    <td><%= f.text_field :security_name_en %></td>
+    <td><%= f.text_field :name_en %></td>
   </tr>
   <tr>
     <th>Security Name (FR)</th>
-    <td><%= f.text_field :security_name_fr %></td>
+    <td><%= f.text_field :name_fr %></td>
   </tr>
   <tr>
     <th>Issues Outstanding</th>
-    <td><%= f.number_field :issues_outstanding %></td>
+    <td><%= f.number_field :issue_outstanding %></td>
   </tr>
   <tr>
     <th>Reserved for Issuance</th>
