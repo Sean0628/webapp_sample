@@ -11,4 +11,10 @@ class Issuer < ApplicationRecord # :nodoc:
 
   validates :external_id, :name_en, :name_fr, :industry, :financial_year_end, presence: true
   validates :external_id, uniqueness: true
+
+  accepts_nested_attributes_for :company_link, allow_destroy: true
+  accepts_nested_attributes_for :company_addresses, allow_destroy: true
+  accepts_nested_attributes_for :billing_addresses, allow_destroy: true
+  accepts_nested_attributes_for :mailing_addresses, allow_destroy: true
+  accepts_nested_attributes_for :security_details, allow_destroy: true
 end
