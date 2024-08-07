@@ -110,5 +110,27 @@ describe EditRequestsController, type: :controller do
         expect(flash[:alert]).to eq('Edit request failed to submit.')
       end
     end
+
+    context 'when the edit request generator fails to create records' do
+      before do
+        allow_any_instance_of(EditRequestDetailsGenerator).to receive(:records_created?).and_return(false)
+      end
+
+      it 'does not create a new edit request' do
+        expect do
+          post :create, params: edit_request_params
+        end.not_to change(EditRequest, :count)
+      end
+
+      it 'redirects to the issuer show page' do
+        post :create, params: edit_request_params
+        expect(response).to redirect_to(issuer_path(issuer))
+      end
+
+      it 'sets a flash alert' do
+        post :create, params: edit_request_params
+        expect(flash[:notice]).to eq('No changes detected. Edit request failed to submit.')
+      end
+    end
   end
 end

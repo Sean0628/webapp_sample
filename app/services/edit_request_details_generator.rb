@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-class EditRequestDetailsGenerator
+class EditRequestDetailsGenerator # :nodoc:
   def initialize(edit_request)
     @edit_request = edit_request
     @issuer = edit_request.issuer
+    @record_created = false
   end
 
   def call(params) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -21,7 +22,14 @@ class EditRequestDetailsGenerator
                                                              params[:mailing_addresses_attributes])
     edit_request_details += check_associated_records_changes(@issuer.security_details,
                                                              params[:security_details_attributes])
-    EditRequestDetail.insert_all!(edit_request_details) if edit_request_details.present?
+    return unless edit_request_details.present?
+
+    EditRequestDetail.insert_all!(edit_request_details)
+    @record_created = true
+  end
+
+  def records_created?
+    @record_created
   end
 
   private

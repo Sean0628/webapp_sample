@@ -5,15 +5,20 @@ class EditRequestsController < ActionController::Base # :nodoc:
     @form = EditRequestForm.new(issuer, issuer_params.except(:issuer_id))
 
     if @form.valid?
+      msg = 'Edit request has been submitted.'
       ActiveRecord::Base.transaction do
         @edit_request = EditRequest.new(issuer_id: issuer.id, status: :pending)
 
         @edit_request.save!
 
-        EditRequestDetailsGenerator.new(@edit_request).call(issuer_params.except(:issuer_id))
+        edit_request_generator.call(issuer_params.except(:issuer_id))
+        unless edit_request_generator.records_created?
+          msg = 'No changes detected. Edit request failed to submit.'
+          raise ActiveRecord::Rollback
+        end
       end
 
-      redirect_to issuer_path(issuer), notice: 'Edit request has been submitted.'
+      redirect_to issuer_path(issuer), notice: msg
     else
       redirect_to edit_issuer_path(issuer), alert: 'Edit request failed to submit.'
     end
@@ -42,5 +47,9 @@ class EditRequestsController < ActionController::Base # :nodoc:
 
   def issuer
     @issuer ||= Issuer.find(issuer_params[:issuer_id])
+  end
+
+  def edit_request_generator
+    @edit_request_generator ||= EditRequestDetailsGenerator.new(@edit_request)
   end
 end
