@@ -1,4 +1,3 @@
-
 <h1>Edit Issuer Details</h1>
 
 <%= form_with(model: @issuer, url: edit_requests_path, method: :post, local: true) do |form| %>
@@ -98,4 +97,3 @@
   <%= form.hidden_field :issuer_id, value: @issuer.id %>
   <%= form.submit 'Submit Edit Request', class: 'btn btn-primary' %>
 <% end %>
-
