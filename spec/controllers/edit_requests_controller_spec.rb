@@ -14,8 +14,8 @@ describe EditRequestsController, type: :controller do
 
     let(:edit_request_params) do
       {
-        issuer_id: issuer.id,
         issuer: {
+          issuer_id: issuer.id,
           name_en: 'Issuer 1',
           name_fr: 'Émetteur 1',
           description_en: 'This is the first example issuer.',
@@ -91,7 +91,7 @@ describe EditRequestsController, type: :controller do
 
     context 'when the edit request is invalid' do
       let(:edit_request_params) do
-        super().merge(issuer: { name_en: nil })
+        super().deep_merge(issuer: { name_en: nil })
       end
 
       it 'does not create a new edit request' do

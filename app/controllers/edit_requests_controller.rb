@@ -2,20 +2,20 @@
 
 class EditRequestsController < ActionController::Base # :nodoc:
   def create # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    form = EditRequestForm.new(Issuer.find(params[:issuer_id]), issuer_params)
+    @form = EditRequestForm.new(issuer, issuer_params.except(:issuer_id))
 
-    if form.valid?
+    if @form.valid?
       ActiveRecord::Base.transaction do
-        @edit_request = EditRequest.new(issuer_id: params[:issuer_id], status: :pending)
+        @edit_request = EditRequest.new(issuer_id: issuer.id, status: :pending)
 
         @edit_request.save!
 
-        EditRequestDetailsGenerator.new(@edit_request).call(issuer_params)
+        EditRequestDetailsGenerator.new(@edit_request).call(issuer_params.except(:issuer_id))
       end
 
-      redirect_to issuer_path(params[:issuer_id]), notice: 'Edit request has been submitted.'
+      redirect_to issuer_path(issuer), notice: 'Edit request has been submitted.'
     else
-      redirect_to edit_issuer_path(params[:issuer_id]), alert: 'Edit request failed to submit.'
+      redirect_to edit_issuer_path(issuer), alert: 'Edit request failed to submit.'
     end
   end
 
@@ -23,7 +23,7 @@ class EditRequestsController < ActionController::Base # :nodoc:
 
   def issuer_params # rubocop:disable Metrics/MethodLength
     params.require(:issuer).permit(
-      :name_en, :name_fr, :description_en, :description_fr, :logo_url, :industry_id, :financial_year_end,
+      :name_en, :name_fr, :description_en, :description_fr, :logo_url, :industry_id, :financial_year_end, :issuer_id,
       company_link_attributes: %i[id linkedin_url youtube_url instagram_url],
       company_addresses_attributes: %i[id country_id address city province_id zip_code _destroy],
       billing_addresses_attributes: %i[id country_id address city province_id zip_code _destroy],
@@ -38,5 +38,9 @@ class EditRequestsController < ActionController::Base # :nodoc:
         _destroy
       ]
     )
+  end
+
+  def issuer
+    @issuer ||= Issuer.find(issuer_params[:issuer_id])
   end
 end
