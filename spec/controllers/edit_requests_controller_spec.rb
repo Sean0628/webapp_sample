@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-describe EditRequestsController, type: :controller do
-  describe 'POST #create' do
+describe EditRequestsController, type: :controller do # rubocop:disable Metrics/BlockLength
+  describe 'POST #create' do # rubocop:disable Metrics/BlockLength
     let(:industry) { create(:industry) }
     let(:issuer) { create(:issuer, industry:) }
     let(:company_link) { create(:company_link, issuer:) }
@@ -12,7 +12,7 @@ describe EditRequestsController, type: :controller do
     let(:mailing_address) { create(:address, address_type: :mailing, issuer:) }
     let(:security_detail) { create(:security_detail, issuer:) }
 
-    let(:edit_request_params) do
+    let(:edit_request_params) do # rubocop:disable Metrics/BlockLength
       {
         issuer: {
           issuer_id: issuer.id,
@@ -111,7 +111,7 @@ describe EditRequestsController, type: :controller do
       end
     end
 
-    context 'when the edit request generator fails to create records' do
+    context 'when the edit request generator does not create any records' do
       before do
         allow_any_instance_of(EditRequestDetailsGenerator).to receive(:records_created?).and_return(false)
       end
@@ -129,7 +129,7 @@ describe EditRequestsController, type: :controller do
 
       it 'sets a flash alert' do
         post :create, params: edit_request_params
-        expect(flash[:notice]).to eq('No changes detected. Edit request failed to submit.')
+        expect(flash[:notice]).to eq('No changes detected. No edit request created.')
       end
     end
   end
