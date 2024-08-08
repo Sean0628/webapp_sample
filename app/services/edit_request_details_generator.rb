@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
-class EditRequestDetailsGenerator # :nodoc:
+# This class is responsible for generating the edit request details for the edit request.
+# It compares the current attributes of the associated records with the new attributes provided by the user.
+# If there are any changes, it creates an edit request detail record.
+# It also checks for changes in the associated records of the associated records.
+# If there are any changes, it creates an edit request detail record for the associated record.
+class EditRequestDetailsGenerator
   def initialize(edit_request)
     @edit_request = edit_request
     @issuer = edit_request.issuer

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class EditRequestForm # :nodoc:
+# This class is responsible for handling the edit request form.
+class EditRequestForm
   include ActiveModel::Model
 
   attr_accessor :issuer, :issuer_params
