@@ -6,12 +6,16 @@ class EditRequestsController < ActionController::Base # :nodoc:
 
     if @form.valid?
       msg = 'Edit request has been submitted.'
+
       ActiveRecord::Base.transaction do
         @edit_request = EditRequest.new(issuer_id: issuer.id, status: :pending)
-
         @edit_request.save!
 
         edit_request_generator.call(issuer_params.except(:issuer_id))
+
+        puts 'Records created?'
+        puts edit_request_generator.records_created?
+
         unless edit_request_generator.records_created?
           msg = 'No changes detected. Edit request failed to submit.'
           raise ActiveRecord::Rollback

@@ -40,7 +40,7 @@ class EditRequestDetailsGenerator # :nodoc:
     edit_request_details = []
 
     attrs.each do |_, attr|
-      record_id = attr[:id]
+      record_id = attr[:id].to_i
       record = records.find { |r| r.id == record_id }
       next unless record
 
