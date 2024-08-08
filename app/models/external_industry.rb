@@ -1,0 +1,2 @@
+class ExternalIndustry < ApplicationRecord
+end

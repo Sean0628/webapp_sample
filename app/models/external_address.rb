@@ -1,0 +1,2 @@
+class ExternalAddress < ApplicationRecord
+end

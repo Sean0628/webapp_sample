@@ -1,0 +1,2 @@
+class ExternalSecurityDetail < ApplicationRecord
+end

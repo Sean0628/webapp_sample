@@ -1,0 +1,2 @@
+class ExternalEditRequestDetail < ApplicationRecord
+end

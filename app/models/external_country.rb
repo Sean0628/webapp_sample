@@ -1,0 +1,2 @@
+class ExternalCountry < ApplicationRecord
+end

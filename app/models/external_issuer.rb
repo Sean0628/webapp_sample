@@ -1,0 +1,2 @@
+class ExternalIssuer < ApplicationRecord
+end
