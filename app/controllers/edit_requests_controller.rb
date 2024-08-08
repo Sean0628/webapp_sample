@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class EditRequestsController < ActionController::Base # :nodoc:
+  def index
+    @pending_edit_requests =
+      EditRequest.includes(:issuer, :edit_request_details).where(status: :pending)
+  end
+
   def create # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     @form = EditRequestForm.new(issuer, issuer_params.except(:issuer_id))
 

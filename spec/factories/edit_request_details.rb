@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :edit_request_detail do
     edit_request
-    field_name { :name_en }
+    field_name { 0 } # :name_en
     old_value { 'Old Value' }
     new_value { 'New Value' }
     associated_record_id { 1 }
