@@ -3,6 +3,23 @@
 require 'rails_helper'
 
 describe EditRequestsController, type: :controller do # rubocop:disable Metrics/BlockLength
+  describe 'GET #index' do
+    let!(:issuer) { create(:issuer) }
+    let!(:pending_edit_request) { create(:edit_request, issuer:, status: :pending) }
+    let!(:approved_edit_request) { create(:edit_request, issuer:, status: :approved) }
+    let!(:rejected_edit_request) { create(:edit_request, issuer:, status: :rejected) }
+
+    before { get :index }
+
+    it 'only assigns pending edit requests' do
+      expect(assigns(:pending_edit_requests)).to eq([pending_edit_request])
+    end
+
+    it 'renders the index template' do
+      expect(response).to render_template(:index)
+    end
+  end
+
   describe 'POST #create' do # rubocop:disable Metrics/BlockLength
     let(:industry) { create(:industry) }
     let(:issuer) { create(:issuer, industry:) }

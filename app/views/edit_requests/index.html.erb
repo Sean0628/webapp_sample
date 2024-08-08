@@ -1,0 +1,30 @@
+<h1>Pending Edit Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Request ID</th>
+      <th>Issuer ID</th>
+      <th>Issuer Name (EN)</th>
+      <th>Issuer Name (FR)</th>
+      <th>Status</th>
+      <th>Requested Fields</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pending_edit_requests.each do |request| %>
+      <tr>
+        <td><%= request.id %></td>
+        <td><%= request.issuer_id %></td>
+        <td><%= request.issuer.name_en %></td>
+        <td><%= request.issuer.name_fr %></td>
+        <td><%= request.status %></td>
+        <td><%= request.requested_fields.count %></td>
+        <td><%= request.created_at %></td>
+        <td><%= request.updated_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
