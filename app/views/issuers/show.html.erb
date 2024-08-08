@@ -1,3 +1,7 @@
+<% if flash[:notice] %>
+  <div class="alert alert-success"><%= flash[:notice] %></div>
+<% end %>
+
 <h1>Issuer Details</h1>
 
 <div class="section">
@@ -63,10 +67,10 @@
         </tr>
         <% @issuer.company_addresses.each do |address| %>
         <tr>
-            <td><%= address.country %></td>
+            <td><%= address.country.name %></td>
             <td><%= address.address %></td>
             <td><%= address.city %></td>
-            <td><%= address.province %></td>
+            <td><%= address.province.name %></td>
             <td><%= address.zip_code %></td>
         </tr>
         <% end %>
@@ -85,10 +89,10 @@
         </tr>
         <% @issuer.billing_addresses.each do |address| %>
         <tr>
-            <td><%= address.country %></td>
+            <td><%= address.country.name %></td>
             <td><%= address.address %></td>
             <td><%= address.city %></td>
-            <td><%= address.province %></td>
+            <td><%= address.province.name %></td>
             <td><%= address.zip_code %></td>
         </tr>
         <% end %>
@@ -107,10 +111,10 @@
         </tr>
         <% @issuer.mailing_addresses.each do |address| %>
         <tr>
-            <td><%= address.country %></td>
+            <td><%= address.country.name %></td>
             <td><%= address.address %></td>
             <td><%= address.city %></td>
-            <td><%= address.province %></td>
+            <td><%= address.province.name %></td>
             <td><%= address.zip_code %></td>
         </tr>
         <% end %>
@@ -129,9 +133,9 @@
         </tr>
         <% @issuer.security_details.each do |security| %>
         <tr>
-            <td><%= security.security_name_en %></td>
-            <td><%= security.security_name_fr %></td>
-            <td><%= security.issues_outstanding %></td>
+            <td><%= security.name_en %></td>
+            <td><%= security.name_fr %></td>
+            <td><%= security.issue_outstanding %></td>
             <td><%= security.reserved_for_issuance %></td>
             <td><%= security.total_equity_shares_as_if_converted %></td>
         </tr>
