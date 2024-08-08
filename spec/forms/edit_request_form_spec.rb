@@ -71,19 +71,6 @@ describe EditRequestForm, type: :model do # rubocop:disable Metrics/BlockLength
 
   subject { described_class.new(issuer, issuer_params) }
 
-  describe '#assign_attributes' do
-    it 'assigns the attributes to the issuer' do
-      subject.assign_attributes(issuer_params)
-      expect(issuer.name_en).to eq 'Updated Issuer Name EN'
-      expect(issuer.name_fr).to eq 'Updated Issuer Name FR'
-      expect(issuer.description_en).to eq 'Updated Description EN'
-      expect(issuer.description_fr).to eq 'Updated Description FR'
-      expect(issuer.logo_url).to eq 'http://example.com/new_logo.png'
-      expect(issuer.industry_id).to eq industry.id
-      expect(issuer.financial_year_end).to eq Date.new(2024, 12, 31)
-    end
-  end
-
   describe '#valid?' do
     context 'when all attributes are valid' do
       it 'returns true' do

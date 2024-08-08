@@ -100,7 +100,7 @@ describe EditRequestsController, type: :controller do # rubocop:disable Metrics/
         end.not_to change(EditRequest, :count)
       end
 
-      it 'redirects to the issuer show page' do
+      it 'redirects to the issuer edit page' do
         post :create, params: edit_request_params
         expect(response).to redirect_to(edit_issuer_path(issuer))
       end
@@ -111,7 +111,7 @@ describe EditRequestsController, type: :controller do # rubocop:disable Metrics/
       end
     end
 
-    context 'when the edit request generator does not create any records' do
+    context 'when there are no changes detected' do
       before do
         allow_any_instance_of(EditRequestDetailsGenerator).to receive(:records_created?).and_return(false)
       end
