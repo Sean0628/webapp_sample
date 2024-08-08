@@ -64,7 +64,7 @@ class EditRequestDetailsGenerator
     associated_record.changes.each do |field, values|
       edit_request_details << {
         edit_request_id: @edit_request.id,
-        field_name: EditRequestDetail.field_types[field],
+        field_name: EditRequestDetail.field_names[field],
         old_value: values[0],
         new_value: values[1],
         associated_record_id: associated_record.id,
