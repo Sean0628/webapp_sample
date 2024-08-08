@@ -25,5 +25,5 @@ class EditRequestDetail < ApplicationRecord # :nodoc:
   belongs_to :edit_request
   belongs_to :associated_record, polymorphic: true
 
-  enum field_type: FIELD_MAP
+  enum field_name: FIELD_MAP
 end
