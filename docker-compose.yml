@@ -6,6 +6,13 @@ services:
     restart: always
     volumes:
       - my-datavolume:/var/lib/mysql
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - my-datavolume-redis:/var/lib/redis/data
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -19,7 +26,25 @@ services:
       DB_PASSWORD: password
       DB_HOST: db
       DB_PORT: 3306
+      REDIS_URL: redis://redis:6379/0
     depends_on:
       - db
+      - redis
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/webapp_sample
+    environment:
+      DB_DATABASE: webapp_sample_development
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_HOST: db
+      DB_PORT: 3306
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
 volumes:
   my-datavolume:
+  my-datavolume-redis:
