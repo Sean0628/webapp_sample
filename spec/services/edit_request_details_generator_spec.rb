@@ -77,7 +77,7 @@ describe EditRequestDetailsGenerator do # rubocop:disable Metrics/BlockLength
 
       edit_request_detail = EditRequestDetail.last
       expect(edit_request_detail.edit_request).to eq(edit_request)
-      expect(edit_request_detail.field_name).to eq(EditRequestDetail.field_types[:total_equity_shares_as_if_converted])
+      expect(edit_request_detail.field_name).to eq('total_equity_shares_as_if_converted')
       expect(edit_request_detail.old_value).to eq(security_detail.total_equity_shares_as_if_converted.to_s)
       expect(edit_request_detail.new_value).to eq('3000')
     end
@@ -90,7 +90,7 @@ describe EditRequestDetailsGenerator do # rubocop:disable Metrics/BlockLength
       edit_request_detail = EditRequestDetail.find_by(associated_record_id: company_address.id,
                                                       associated_record_type: 'Address')
       expect(edit_request_detail.edit_request).to eq(edit_request)
-      expect(edit_request_detail.field_name).to eq(EditRequestDetail.field_types[:address])
+      expect(edit_request_detail.field_name).to eq('address')
       expect(edit_request_detail.old_value).to eq(company_address.address)
       expect(edit_request_detail.new_value).to eq('New Company Address')
     end
