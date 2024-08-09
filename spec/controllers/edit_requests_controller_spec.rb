@@ -4,7 +4,8 @@ require 'rails_helper'
 
 describe EditRequestsController, type: :controller do # rubocop:disable Metrics/BlockLength
   describe 'GET #index' do
-    let!(:issuer) { create(:issuer) }
+    let(:external_issuer) { create(:external_issuer) }
+    let!(:issuer) { create(:issuer, external_id: external_issuer.id) }
     let!(:pending_edit_request) { create(:edit_request, issuer:, status: :pending) }
     let!(:approved_edit_request) { create(:edit_request, issuer:, status: :approved) }
     let!(:rejected_edit_request) { create(:edit_request, issuer:, status: :rejected) }
@@ -21,13 +22,25 @@ describe EditRequestsController, type: :controller do # rubocop:disable Metrics/
   end
 
   describe 'POST #create' do # rubocop:disable Metrics/BlockLength
+    let(:external_issuer) { create(:external_issuer) }
+    let(:external_company_link) { create(:external_company_link, external_issuer:) }
+    let(:external_company_address) { create(:external_address, address_type: :company, external_issuer:) }
+    let(:external_billing_address) { create(:external_address, address_type: :billing, external_issuer:) }
+    let(:external_mailing_address) { create(:external_address, address_type: :mailing, external_issuer:) }
+    let(:external_security_detail) { create(:external_security_detail, external_issuer:) }
     let(:industry) { create(:industry) }
-    let(:issuer) { create(:issuer, industry:) }
-    let(:company_link) { create(:company_link, issuer:) }
-    let(:company_address) { create(:address, address_type: :company, issuer:) }
-    let(:billing_address) { create(:address, address_type: :billing, issuer:) }
-    let(:mailing_address) { create(:address, address_type: :mailing, issuer:) }
-    let(:security_detail) { create(:security_detail, issuer:) }
+    let(:issuer) { create(:issuer, external_id: external_issuer.id, industry:) }
+    let(:company_link) { create(:company_link, external_id: external_company_link.id, issuer:) }
+    let(:company_address) do
+      create(:address, address_type: :company, external_id: external_company_address.id, issuer:)
+    end
+    let(:billing_address) do
+      create(:address, address_type: :billing, external_id: external_billing_address.id, issuer:)
+    end
+    let(:mailing_address) do
+      create(:address, address_type: :mailing, external_id: external_mailing_address.id, issuer:)
+    end
+    let(:security_detail) { create(:security_detail, external_id: external_security_detail.id, issuer:) }
 
     let(:edit_request_params) do # rubocop:disable Metrics/BlockLength
       {

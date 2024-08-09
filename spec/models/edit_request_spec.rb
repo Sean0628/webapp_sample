@@ -4,6 +4,11 @@ require 'rails_helper'
 
 describe EditRequest do
   describe '#requested_fields' do
+    before do
+      # To bypass the callback, we need to stub the method
+      allow(EditRequestNotifier).to receive(:notify)
+    end
+
     let(:issuer) { create(:issuer) }
     let(:edit_request) { create(:edit_request, issuer:) }
     let(:field_name) { :name_en }

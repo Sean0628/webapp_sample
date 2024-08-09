@@ -26,4 +26,6 @@ class EditRequestDetail < ApplicationRecord # :nodoc:
   belongs_to :associated_record, polymorphic: true
 
   enum field_name: FIELD_MAP
+
+  delegate :external_id, :external_type, to: :associated_record
 end

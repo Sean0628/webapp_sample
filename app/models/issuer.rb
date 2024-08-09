@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Issuer < ApplicationRecord # :nodoc:
+  include ExternalAssociable
+
   belongs_to :industry
   has_one :company_link, dependent: :destroy
   has_many :addresses, dependent: :destroy

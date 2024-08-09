@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SecurityDetail < ApplicationRecord # :nodoc:
+  include ExternalAssociable
+
   belongs_to :issuer
 
   validates :issuer, :name_en, :name_fr, :issue_outstanding, :reserved_for_issuance,

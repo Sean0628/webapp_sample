@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Address < ApplicationRecord # :nodoc:
+  include ExternalAssociable
+
   belongs_to :issuer
   belongs_to :country
   belongs_to :province

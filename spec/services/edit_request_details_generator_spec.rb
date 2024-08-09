@@ -3,6 +3,10 @@
 require 'rails_helper'
 
 describe EditRequestDetailsGenerator do # rubocop:disable Metrics/BlockLength
+  before do
+    # To bypass the callback, we need to stub the method
+    allow(EditRequestNotifier).to receive(:notify)
+  end
   let(:industry) { create(:industry) }
   let(:issuer) { create(:issuer, industry:) }
   let(:edit_request) { create(:edit_request, issuer:) }

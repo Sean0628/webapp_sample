@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CompanyLink < ApplicationRecord # :nodoc:
+  include ExternalAssociable
+
   URL_REGEX = URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   belongs_to :issuer
