@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_09_055759) do
     t.datetime "updated_at", null: false
     t.integer "external_id", null: false
     t.index ["country_id"], name: "index_addresses_on_country_id"
+    t.index ["external_id"], name: "index_addresses_on_external_id", unique: true
     t.index ["issuer_id"], name: "index_addresses_on_issuer_id"
     t.index ["province_id"], name: "index_addresses_on_province_id"
   end
@@ -35,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_09_055759) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "external_id", null: false
+    t.index ["external_id"], name: "index_company_links_on_external_id", unique: true
     t.index ["issuer_id"], name: "index_company_links_on_issuer_id"
   end
 
@@ -192,6 +194,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_09_055759) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "external_id", null: false
+    t.index ["external_id"], name: "index_security_details_on_external_id", unique: true
     t.index ["issuer_id"], name: "index_security_details_on_issuer_id"
   end
 
