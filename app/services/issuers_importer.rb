@@ -19,6 +19,7 @@ class IssuersImporter # :nodoc:
   def upsert_issuers(issuers_data) # rubocop:disable Metrics/MethodLength
     issuers_data.each do |issuer_data|
       issuer = Issuer.find_or_initialize_by(external_id: issuer_data['id'])
+      issuer_data.tap { |data| data['industry_id'] = data.delete('external_industry_id') }
       issuer.assign_attributes(
         issuer_data.except(
           'external_company_link',

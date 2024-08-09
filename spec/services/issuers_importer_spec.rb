@@ -12,7 +12,7 @@ describe IssuersImporter do
         'description_en' => 'Description in English',
         'description_fr' => 'Description en Français',
         'logo_url' => 'https://example.com/logo.png',
-        'industry_id' => industry.id,
+        'external_industry_id' => industry.id,
         'financial_year_end' => '2023-12-31',
         'external_company_link' => {
           'id' => 1,
@@ -46,9 +46,9 @@ describe IssuersImporter do
 
     let(:external_exporter_double) { instance_double('External::IssuersExporter', export: [issuer_data].to_json) }
 
-    let(:industry) { create(:industry) }
-    let(:country) { create(:country) }
-    let(:province) { create(:province) }
+    let!(:industry) { create(:industry) }
+    let!(:country) { create(:country) }
+    let!(:province) { create(:province) }
 
     before do
       allow(External::IssuersExporter).to receive(:export).and_return([issuer_data].to_json)
