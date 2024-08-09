@@ -6,6 +6,8 @@ services:
     restart: always
     volumes:
       - my-datavolume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
   redis:
     image: redis:latest
     restart: always
