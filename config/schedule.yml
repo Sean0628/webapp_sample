@@ -1,0 +1,3 @@
+issuers_import_job:
+  cron: "*/10 * * * *" # every 10 minutes
+  class: "IssuersImportJob"
