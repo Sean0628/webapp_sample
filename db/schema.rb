@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_08_223246) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_09_025506) do
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "issuer_id", null: false
     t.bigint "country_id", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_08_223246) do
     t.integer "address_type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "external_id", null: false
     t.index ["country_id"], name: "index_addresses_on_country_id"
     t.index ["issuer_id"], name: "index_addresses_on_issuer_id"
     t.index ["province_id"], name: "index_addresses_on_province_id"
@@ -33,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_08_223246) do
     t.string "instagram_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "external_id", null: false
     t.index ["issuer_id"], name: "index_company_links_on_issuer_id"
   end
 
@@ -187,6 +189,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_08_223246) do
     t.integer "total_equity_shares_as_if_converted", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "external_id", null: false
     t.index ["issuer_id"], name: "index_security_details_on_issuer_id"
   end
 
