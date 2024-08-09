@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class IssuersImporter # :nodoc:
-  def self.import
+  def self.import!
     new.execute
   end
 

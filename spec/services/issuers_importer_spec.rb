@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe IssuersImporter do
-  describe '.import' do
+  describe '.import!' do
     let(:issuer_data) do
       {
         'id' => 1,
@@ -56,12 +56,12 @@ describe IssuersImporter do
 
     it 'fetches external data' do
       expect(External::IssuersExporter).to receive(:export).and_return([issuer_data].to_json)
-      described_class.import
+      described_class.import!
     end
 
     it 'upserts issuers' do
       expect do
-        described_class.import
+        described_class.import!
       end.to change { Issuer.count }.by(1)
 
       issuer = Issuer.find_by(external_id: 1)
@@ -73,7 +73,7 @@ describe IssuersImporter do
 
     it 'upserts company links' do
       expect do
-        described_class.import
+        described_class.import!
       end.to change { CompanyLink.count }.by(1)
 
       company_link = CompanyLink.find_by(external_id: 1)
@@ -84,7 +84,7 @@ describe IssuersImporter do
 
     it 'upserts addresses' do
       expect do
-        described_class.import
+        described_class.import!
       end.to change { Address.count }.by(1)
 
       address = Address.find_by(external_id: 1)
@@ -96,7 +96,7 @@ describe IssuersImporter do
 
     it 'upserts security details' do
       expect do
-        described_class.import
+        described_class.import!
       end.to change { SecurityDetail.count }.by(1)
 
       security_detail = SecurityDetail.find_by(external_id: 1)
