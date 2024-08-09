@@ -2,8 +2,8 @@
 
 # This script updates the status of an ExternalEditRequest based on the provided EditRequest.id and the new status.
 
-# Usage: rails runner update_external_edit_request_status.rb <EditRequest.id> <new_status>
-# Example: rails runner scripts/update_external_edit_request_status.rb 1 approved
+# Usage: rails runner ./scripts/update_external_edit_request_status.rb <EditRequest.id> <new_status>
+# Example: rails runner ./scripts/update_external_edit_request_status.rb 1 approved
 
 def update_external_edit_request_status(edit_request_id, new_status) # rubocop:disable Metrics/MethodLength
   # Fetch the EditRequest by id
