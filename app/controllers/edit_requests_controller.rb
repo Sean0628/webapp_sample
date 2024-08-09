@@ -41,9 +41,9 @@ class EditRequestsController < ActionController::Base # :nodoc:
       mailing_addresses_attributes: %i[id country_id address city province_id zip_code _destroy],
       security_details_attributes: %i[
         id
-        security_name_en
-        security_name_fr
-        issues_outstanding
+        name_en
+        name_fr
+        issue_outstanding
         reserved_for_issuance
         total_equity_shares_as_if_converted
         _destroy
