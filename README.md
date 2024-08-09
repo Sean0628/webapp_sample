@@ -69,7 +69,7 @@
 
     ```sh
     # <EditRequest.id> is the id of the edit request you want to approve/reject.
-    # You can find the id on the edit request show page (http://localhost:3000/edit_requests/:id). (RequestID column)
+    # You can find the id on the edit request index page (http://localhost:3000/edit_requests/). (RequestID column)
     # <new_status> is approved or rejected
     $ docker-compose run --rm web rails runner ./scripts/update_external_edit_request_status.rb <EditRequest.id> <new_status>
     ```
