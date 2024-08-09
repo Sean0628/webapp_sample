@@ -1,2 +1,5 @@
-class ExternalProvince < ApplicationRecord
+# frozen_string_literal: true
+
+class ExternalProvince < ApplicationRecord # :nodoc:
+  has_many :external_issuers, dependent: :restrict_with_error
 end
