@@ -12,7 +12,7 @@ class EditRequestNotifier
 
   # In the real application, this method would notify an external service
   # but here we create data in the tables for simplicity.
-  def notify # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  def notify # rubocop:disable Metrics/MethodLength
     ActiveRecord::Base.transaction do
       external_request = ExternalEditRequest.create!(
         external_issuer_id: edit_request.issuer.external_id,
@@ -20,7 +20,6 @@ class EditRequestNotifier
       )
 
       edit_request.edit_request_details.each do |detail|
-        puts detail.field_name
         ExternalEditRequestDetail.create!(
           external_edit_request_id: external_request.id,
           field_name: detail.field_name,
