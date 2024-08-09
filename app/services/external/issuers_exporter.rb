@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module External
+  # This class is responsible for exporting the issuers data as JSON.
   class IssuersExporter
     ASSOCIATIONS = %i[external_company_link external_addresses external_security_details].freeze
 
@@ -16,8 +17,9 @@ module External
       JSON.pretty_generate(issuers_data)
     end
 
+    # This module is responsible for formatting the issuer data.
     module Formatter
-      def call(issuer)
+      def call(issuer) # rubocop:disable Metrics/MethodLength
         issuer.as_json(include: {
                          external_company_link: {
                            only: %i[id linkedin_url youtube_url instagram_url]

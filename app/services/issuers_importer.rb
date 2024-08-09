@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-class IssuersImporter # :nodoc:
+# This class is responsible for importing issuers from an external source.
+# It fetches the external data, upserts the issuers, and upserts the associated
+# company links, addresses, and security details.
+class IssuersImporter
   def self.import!
     new.execute
   end
