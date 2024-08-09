@@ -89,3 +89,12 @@
     ```sh
     $ docker-compose run --rm web rspec
     ```
+
+## External Data Synchronization
+
+Every 10 minutes, the backend data will be loaded from the external database. For this project, both the external and internal services can use MySQL databases on the same machine or even different sets of tables within the same database.
+
+- Tables with the `external_` prefix are designated for the external service.
+- Tables without the `external_` prefix are used by our internal application.
+
+This setup ensures that the application can seamlessly integrate and synchronize data between the internal system and the external service.
