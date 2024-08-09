@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :security_detail do
     issuer
+    external_id { 1 }
     name_en { 'Security Name EN' }
     name_fr { 'Security Name FR' }
     issue_outstanding { 1000 }

@@ -5,6 +5,7 @@ FactoryBot.define do
     issuer
     country
     province
+    external_id { 1 }
     address { '123 Example St' }
     city { 'Example City' }
     zip_code { '12345' }
